@@ -1,0 +1,25 @@
+public class Pedido {
+    private String codigoPedido;
+    private StatusPedido status;
+
+    public Pedido(String codigoPedido, StatusPedido status) {
+        this.codigoPedido = codigoPedido;
+        this.status = status;
+    }
+
+    public String getCodigoPedido() {
+        return codigoPedido;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
+
+    public String obterStatus() {
+        return "Status do Pedido " + codigoPedido + ": " + status.getDescricao();
+    }
+}
