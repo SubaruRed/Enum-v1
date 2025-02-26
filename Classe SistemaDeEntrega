@@ -1,0 +1,48 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class SistemaDeEntrega {
+    private Map<String, Pedido> pedidos;
+
+    public SistemaDeEntrega() {
+        pedidos = new HashMap<>();
+    }
+
+    public void adicionarPedido(Pedido pedido) {
+        pedidos.put(pedido.getCodigoPedido(), pedido);
+    }
+
+    public Pedido pesquisarPedido(String codigo) {
+        return pedidos.get(codigo);
+    }
+
+    public void exibirStatusPedido(String codigoPedido) {
+        Pedido pedido = pesquisarPedido(codigoPedido);
+        if (pedido != null) {
+            System.out.println(pedido.obterStatus());
+        } else {
+            System.out.println("Pedido não encontrado.");
+        }
+    }
+
+    public static void main(String[] args) {
+        SistemaDeEntrega sistema = new SistemaDeEntrega();
+        
+        // Adicionando pedidos fictícios ao sistema
+        sistema.adicionarPedido(new Pedido("001", StatusPedido.PENDENTE));
+        sistema.adicionarPedido(new Pedido("002", StatusPedido.EM_TRANSPORTE));
+        sistema.adicionarPedido(new Pedido("003", StatusPedido.ENTREGUE));
+        sistema.adicionarPedido(new Pedido("004", StatusPedido.CANCELADO));
+        
+        // Scanner para leitura do código de pedido
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o código do pedido: ");
+        String codigoPedido = scanner.nextLine();
+        
+        // Exibindo o status do pedido
+        sistema.exibirStatusPedido(codigoPedido);
+        
+        scanner.close();
+    }
+}
